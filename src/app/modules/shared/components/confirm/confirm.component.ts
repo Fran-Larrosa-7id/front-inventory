@@ -1,0 +1,44 @@
+import { Component, Inject, OnInit } from '@angular/core';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { CategoryService } from '../../services/category.service';
+
+@Component({
+  selector: 'app-confirm',
+  templateUrl: './confirm.component.html',
+  styleUrls: ['./confirm.component.css']
+})
+export class ConfirmComponent implements OnInit {
+
+  constructor(public dialogRef:MatDialogRef<ConfirmComponent>,
+              @Inject (MAT_DIALOG_DATA) public data:any,
+              private categoryService:CategoryService) { }
+
+  ngOnInit(): void {
+  }
+
+
+  onNoClick(){
+    this.dialogRef.close(3)
+  }
+
+  deleteD(){
+    if(this.data !=null){
+
+      this.categoryService.deleteCategory(this.data.id)
+      .subscribe(
+        {
+          next: res => {
+            this.dialogRef.close(1);
+          },
+          error: err=>{
+            this.dialogRef.close(2);
+          }
+        }
+      )
+
+    } else {
+      this.dialogRef.close(2);
+    }
+  }
+
+}
