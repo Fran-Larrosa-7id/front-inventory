@@ -39,6 +39,13 @@ export class CategoryService {
     const endPoint = `${baseUrl}/categories/${id}`;
     return this.http.delete(endPoint);
   }
+
+  // search category
+  getCategoryById(id:any){
+    const endPoint = `${baseUrl}/categories/${id}`;
+    return this.http.get(endPoint);
+  }
+
   
 
 }

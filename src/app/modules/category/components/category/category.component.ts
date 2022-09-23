@@ -107,6 +107,23 @@ deleteCategory(id:any){
 
 }
 
+buscar(termino:any){
+  if(termino.lenght === 0){
+
+    return this.getCategories()
+
+  }
+
+  this.categyService.getCategoryById(termino)
+  .subscribe(
+    {
+      next: res => {
+        this.processCategoriesResponse(res)
+      }
+    }
+  )
+}
+
 
 }
 
